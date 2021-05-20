@@ -1,0 +1,12 @@
+<img
+  [src]="sharing.photoUrl || '../../assets/defaultSharingPicture.png'"
+  class="card-img-top"
+  alt="nice car"
+/>
+<div class="card-body">
+  <p class="card-text font-weight-bold">{{ sharing.productDescription }}</p>
+  <p *ngIf="sharing.availableQty > 0" class="card-text">
+    {{ sharing.availableQty }} Portions Available
+  </p>
+  <p class="card-text">{{ sharing.portionPrice | currency }} EA</p>
+</div>

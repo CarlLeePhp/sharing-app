@@ -1,0 +1,50 @@
+<div *ngIf="sharing" class="row justify-content-center">
+  <div class="col-4">
+    <img [src]="sharing.photoUrl || '../../assets/defaultSharingPicture.png'" />
+  </div>
+  <div class="col-4">
+    <h5>{{ sharing.productDescription }}</h5>
+    <Strong>Portion Description: </Strong>
+    <p>{{ sharing.portionDescription }}</p>
+    <p><strong>Portion Price: </strong>{{ sharing.portionPrice | currency }}</p>
+    <p><strong>Portion Qty: </strong>{{ sharing.portionQty }}</p>
+    <p>Sharing will be end at: {{ sharing.deadline | date }}</p>
+  </div>
+</div>
+<div class="row justify-content-center mt-3">
+  <form class="col-8">
+    <span>Rate for this sharing</span>
+    <rating
+      [(ngModel)]="comment.sharingRate"
+      [max]="maxRate"
+      [readonly]="isReadonly"
+      name="sharingRate"
+    ></rating>
+    <div class="form-group">
+      <label for="sharingComment">Shring Comment</label>
+      <input
+        class="form-control"
+        type="text"
+        name="sharingComment"
+        [(ngModel)]="comment.sharingComment"
+      />
+    </div>
+    <span>Rate for the sharer</span>
+    <rating
+      [(ngModel)]="comment.sharerRate"
+      [max]="maxRate"
+      [readonly]="isReadonly"
+      name="sharerRate"
+    ></rating>
+    <div class="form-group">
+      <label for="sharerComment">Shring Comment</label>
+      <input
+        class="form-control"
+        type="text"
+        name="sharerComment"
+        [(ngModel)]="comment.sharerComment"
+      />
+    </div>
+    <button class="btn btn-primary" (click)="createComment()">Comment</button>
+  </form>
+</div>

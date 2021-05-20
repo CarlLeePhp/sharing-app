@@ -1,0 +1,115 @@
+<div class="container" *ngIf="member">
+  <div class="row justify-content-center">
+    <div class="col-12 col-lg-3 mb-5">
+      <h4>Your Profile</h4>
+      <div class="card">
+        <img
+          [src]="member.photoUrl || '../../assets/defaultUserPicture.png'"
+          alt="Portrait"
+          class="card-img-top"
+        />
+        <div class="card-body">
+          <h4>{{ member.userName }}</h4>
+          <p><strong>Email: </strong>{{ member.email }}</p>
+
+          <p><strong>Change Picture:</strong></p>
+          <input
+            type="file"
+            class="file-input"
+            (change)="onFileSelected($event)"
+            #fileUpload
+          />
+          <button class="btn btn-primary" (click)="fileUpload.click()">
+            Select a Picture
+          </button>
+          <p>{{ fileName || "No File Selected" }}</p>
+          <button class="btn btn-primary" (click)="uploadFile()">Upload</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-lg-8">
+      <p class="alert alert-info" *ngIf="profileForm.dirty">
+        <strong>Information: </strong>You have made changes. Any unsaved changes
+        will be lost.
+      </p>
+      <form #profileForm="ngForm" id="profileForm" (ngSubmit)="updateMember()">
+        <div class="form-group">
+          <label for="street">Street</label>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="member.street"
+            name="street"
+          />
+        </div>
+        <div class="form-group">
+          <label for="city">City</label>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="member.city"
+            name="city"
+          />
+        </div>
+        <div class="form-check-inline">
+          <input
+            type="radio"
+            class="form-check-input"
+            name="gender"
+            id="genderMale"
+            [(ngModel)]="member.gender"
+            [value]="true"
+            [checked]="member.gender"
+          />
+          <label for="genderMale" class="form-check-label">Male</label>
+        </div>
+        <div class="form-check-inline">
+          <input
+            type="radio"
+            class="form-check-input"
+            name="gender"
+            id="genderFemale"
+            [(ngModel)]="member.gender"
+            [value]="false"
+            [checked]="!member.gender"
+          />
+          <label for="genderFemale" class="form-check-label">Female</label>
+        </div>
+        <div class="form-group">
+          <button
+            type="submit"
+            class="btn btn-success"
+            [disabled]="!profileForm.dirty"
+          >
+            Save Changes
+          </button>
+        </div>
+      </form>
+      <h4>You are interest in:</h4>
+      <div *ngIf="member.interests.length > 0" class="row">
+        <div
+          *ngFor="let interest of member.interests"
+          class="border d-flex p-1 ml-2"
+        >
+          <span> {{ interest.category.description }}</span>
+          <button
+            class="btn btn-sm btn-light btn-circle ml-2"
+            (click)="deleteInterest(interest.id)"
+          >
+            X
+          </button>
+        </div>
+      </div>
+      <div *ngIf="categories.length > 0" class="form-inline mt-3">
+        <select class="form-control" name="categoryId" [(ngModel)]="categoryId">
+          <option *ngFor="let category of categories" [value]="category.id">
+            {{ category.description }}
+          </option>
+        </select>
+        <button class="btn btn-success ml-2" (click)="addInterest()">
+          Add
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

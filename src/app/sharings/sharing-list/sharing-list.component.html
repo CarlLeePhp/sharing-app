@@ -1,0 +1,15 @@
+<h4 *ngIf="sharings.length == 0" class="text-danger">
+  There is no available sharing for this section.
+</h4>
+<div
+  *ngIf="sharings.length > 0"
+  class="d-flex flex-row flex-wrap justify-content-start"
+>
+  <app-sharing-item
+    *ngFor="let sharing of sharings"
+    [sharing]="sharing"
+    class="d-flex card ml-2"
+    style="width: 200px"
+    (click)="goDetail(sharing.id)"
+  ></app-sharing-item>
+</div>

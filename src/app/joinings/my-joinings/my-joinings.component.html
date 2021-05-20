@@ -1,0 +1,165 @@
+<h2 class="text-primary">Ongoing Joinings</h2>
+<hr />
+<div *ngIf="joinings.length == 0">
+  <strong>There is no joining.</strong>
+</div>
+<div *ngIf="ongoingJoinings.length > 0">
+  <div class="row" *ngFor="let ongoingJoining of ongoingJoinings">
+    <div class="col-4">
+      <img
+        class="img-fluid"
+        [src]="
+          ongoingJoining.sharing.photoUrl ||
+          '../../../assets/defaultSharingPicture.png'
+        "
+      />
+    </div>
+    <div class="col-4">
+      <h5>{{ ongoingJoining.sharing.productDescription }}</h5>
+
+      <Strong>Portion Description: </Strong>
+      <p>{{ ongoingJoining.sharing.portionDescription }}</p>
+      <p>
+        <strong>Portion Price: </strong
+        >{{ ongoingJoining.sharing.portionPrice | currency }}
+      </p>
+      <p>
+        Sharing will be end at: {{ ongoingJoining.sharing.deadline | date }}
+      </p>
+    </div>
+    <div class="col-4">
+      <p>
+        <strong>Portion Qty: </strong>{{ ongoingJoining.sharing.portionQty }}
+      </p>
+      <p>
+        <strong>Available Aty: </strong>
+        {{ ongoingJoining.sharing.availableQty }} portions
+      </p>
+      <div class="d-flex flex-row">
+        <p><strong>Your Qty: </strong> {{ ongoingJoining.joinQty }} portions</p>
+        <button
+          class="btn btn-primary btn-sm ml-2"
+          (click)="reduce(ongoingJoining.id)"
+        >
+          -
+        </button>
+        <button
+          class="btn btn-primary btn-sm ml-1"
+          (click)="addQty(ongoingJoining.id)"
+        >
+          +
+        </button>
+        <button
+          class="btn btn-success ml-2"
+          (click)="updateQty(ongoingJoining.id)"
+        >
+          Update
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Achieved Joinings -->
+<h2 class="text-primary">Achieved Joinings</h2>
+<hr />
+<div *ngIf="achievedJoinings.length == 0">
+  <p class="text-danger">No Achieved Joining</p>
+</div>
+<div *ngIf="achievedJoinings.length > 0">
+  <div class="row" *ngFor="let achievedJoining of achievedJoinings">
+    <div class="col-4">
+      <img
+        class="img-fluid"
+        [src]="
+          achievedJoining.sharing.photoUrl ||
+          '../../../assets/defaultSharingPicture.png'
+        "
+      />
+    </div>
+    <div class="col-4">
+      <h5>{{ achievedJoining.sharing.productDescription }}</h5>
+
+      <Strong>Portion Description: </Strong>
+      <p>{{ achievedJoining.sharing.portionDescription }}</p>
+      <p>
+        <strong>Portion Price: </strong
+        >{{ achievedJoining.sharing.portionPrice | currency }}
+      </p>
+      <p>
+        Sharing will be end at: {{ achievedJoining.sharing.deadline | date }}
+      </p>
+      <strong>Address for getting your product: </strong>
+      <p>
+        {{ achievedJoining.sharing.howToShare }}
+      </p>
+    </div>
+    <div class="col-4">
+      <p>
+        <strong>Portion Qty: </strong>{{ achievedJoining.sharing.portionQty }}
+      </p>
+      <p>
+        <strong>Available Aty: </strong>
+        {{ achievedJoining.sharing.availableQty }} portions
+      </p>
+      <p><strong>Your Qty: </strong> {{ achievedJoining.joinQty }} portions</p>
+      <button
+        [disabled]="achievedJoining.status == 1"
+        class="btn btn-primary"
+        (click)="updateStatus(achievedJoining.id)"
+      >
+        Complete
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Completed Joinings -->
+<h2 class="text-primary">Completed Joinings</h2>
+<hr />
+<div *ngIf="completedJoinings.length == 0">
+  <p class="text-danger">No Completed Joining</p>
+</div>
+<div *ngIf="completedJoinings.length > 0">
+  <div class="row" *ngFor="let completedJoining of completedJoinings">
+    <div class="col-4">
+      <img
+        class="img-fluid"
+        [src]="
+          completedJoining.sharing.photoUrl ||
+          '../../../assets/defaultSharingPicture.png'
+        "
+      />
+    </div>
+    <div class="col-4">
+      <h5>{{ completedJoining.sharing.productDescription }}</h5>
+
+      <Strong>Portion Description: </Strong>
+      <p>{{ completedJoining.sharing.portionDescription }}</p>
+      <p>
+        <strong>Portion Price: </strong
+        >{{ completedJoining.sharing.portionPrice | currency }}
+      </p>
+      <p>
+        Sharing will be end at: {{ completedJoining.sharing.deadline | date }}
+      </p>
+    </div>
+    <div class="col-4">
+      <p>
+        <strong>Portion Qty: </strong>{{ completedJoining.sharing.portionQty }}
+      </p>
+      <p>
+        <strong>Available Aty: </strong>
+        {{ completedJoining.sharing.availableQty }} portions
+      </p>
+      <p><strong>Your Qty: </strong> {{ completedJoining.joinQty }} portions</p>
+      <button
+        class="btn btn-primary"
+        (click)="commentSharing(completedJoining.sharing)"
+        [disabled]="completedJoining.status == 2"
+      >
+        Comment
+      </button>
+    </div>
+  </div>
+</div>

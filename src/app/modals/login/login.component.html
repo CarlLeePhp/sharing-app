@@ -1,0 +1,28 @@
+<div class="modal-header">
+  <h4 class="modal-title text-primary">Login</h4>
+</div>
+<div class="modal-body">
+  <div class="container">
+    <input
+      name="email"
+      [(ngModel)]="model.email"
+      class="form-control"
+      type="text"
+      placeholder="Email"
+    />
+    <input
+      name="password"
+      [(ngModel)]="model.password"
+      class="form-control mt-3"
+      type="password"
+      placeholder="Password"
+    />
+    <button class="btn btn-default mt-2" (click)="forgotPassword()">
+      Forgot Password
+    </button>
+  </div>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-primary" (click)="login()">Login</button>
+  <button class="btn btn-default" (click)="bsModalRef.hide()">Close</button>
+</div>

@@ -1,0 +1,17 @@
+<div *ngIf="accountService.currentUser$ | async as user">
+  <div class="d-flex flex-row mt-5">
+    <h2 class="d-flex mr-auto text-primary">Recommend for You</h2>
+  </div>
+  <hr />
+  <app-sharing-list [sharings]="recommendSharings"></app-sharing-list>
+</div>
+<div class="d-flex flex-row mt-5">
+  <h2 class="d-flex mr-auto text-primary">Published Sharings</h2>
+</div>
+<hr />
+<app-sharing-list [sharings]="publishedSharings"></app-sharing-list>
+<div class="d-flex flex-row mt-5">
+  <h2 class="d-flex mr-auto text-primary">Completed Sharings</h2>
+</div>
+<hr />
+<app-sharing-list [sharings]="completedSharings"></app-sharing-list>

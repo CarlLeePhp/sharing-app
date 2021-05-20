@@ -1,0 +1,68 @@
+<div *ngIf="sharing" class="row">
+  <div class="col-4">
+    <h4>{{ sharing.productDescription }}</h4>
+    <img
+      class="img-fluid"
+      [src]="sharing.photoUrl || '../../../assets/defaultSharingPicture.png'"
+    />
+  </div>
+  <div class="col-4">
+    <p><strong>Category: </strong>{{ sharing.category.description }}</p>
+    <Strong>Portion Description: </Strong>
+    <p>{{ sharing.portionDescription }}</p>
+  </div>
+  <div class="col-4">
+    <p><strong>Portion Price: </strong>{{ sharing.portionPrice | currency }}</p>
+    <p><strong>Available Portion Qty: </strong>{{ sharing.availableQty }}</p>
+    <p>Sharing will be end at: {{ sharing.deadline | date }}</p>
+    <div class="row">
+      <button
+        class="btn btn-primary"
+        (click)="joinSharing()"
+        *ngIf="
+          sharing.status == 2 && accountService.currentUser$ | async as user
+        "
+      >
+        Join
+      </button>
+      <a class="btn btn-secondary ml-2" href="/home">Back</a>
+    </div>
+  </div>
+
+  <div *ngIf="sharing.status == 4">
+    <div *ngIf="comments.length == 0">No comment</div>
+    <div *ngIf="comments.length > 0">
+      <div *ngFor="let comment of comments">
+        <p>Sharing Rate: {{ comment.sharingRate }}</p>
+        <div>
+          <rating
+            [max]="5"
+            [(ngModel)]="comment.sharingRate"
+            [customTemplate]="t"
+          ></rating>
+
+          <ng-template #t let-index="index" let-value="value">
+            <img
+              [src]="
+                index < value
+                  ? '../../../assets/star-light.png'
+                  : '../../../assets/star.png'
+              "
+              style="height: 20px; width: 20px"
+            />
+          </ng-template>
+        </div>
+        <p>Sharing Comment: {{ comment.sharingComment }}</p>
+        <p>Sharer Rate: {{ comment.sharerRate }}</p>
+        <div>
+          <rating
+            [max]="5"
+            [(ngModel)]="comment.sharerRate"
+            [customTemplate]="t"
+          ></rating>
+        </div>
+        <p>Sharer Comment: {{ comment.sharerComment }}</p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,67 @@
+<div class="modal-header">
+  <h4 class="modal-title text-primary">Register</h4>
+</div>
+<div class="modal-body">
+  <div class="container">
+    <p class="text-danger" *ngIf="isEmailEmpty">Email cannot be empty</p>
+
+    <input
+      type="email"
+      name="email"
+      class="form-control"
+      [(ngModel)]="model.email"
+      placeholder="Email"
+    />
+
+    <p class="text-danger" *ngIf="isUserNameEmpty">User Name cannot be empty</p>
+    <input
+      type="text"
+      name="userName"
+      class="form-control mt-3"
+      [(ngModel)]="model.userName"
+      placeholder="Username"
+    />
+    <p class="text-danger" *ngIf="isPasswordEmpty">Password cannot be empty</p>
+
+    <input
+      type="password"
+      name="password"
+      class="form-control mt-3"
+      [(ngModel)]="model.password"
+      placeholder="Password"
+    />
+    <p class="text-danger" *ngIf="isPasswordConfirmEmpty">
+      Passwrod Confirm cannot be empty
+    </p>
+    <p class="text-danger" *ngIf="isPasswordsNotMatch">
+      Passwords are not matched
+    </p>
+    <p>
+      <span
+        popover="Passwrod Confirm cannot be empty"
+        [isOpen]="isPasswordConfirmEmpty"
+        [outsideClick]="true"
+      ></span>
+    </p>
+
+    <input
+      type="password"
+      name="password"
+      class="form-control mt-3"
+      [(ngModel)]="confirmPassword"
+      placeholder="Confirm Password"
+    />
+    <p>
+      <span
+        popover="Passwords are not matched"
+        [isOpen]="isPasswordsNotMatch"
+        [outsideClick]="true"
+        placement="bottom"
+      ></span>
+    </p>
+  </div>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-primary" (click)="register()">Register</button>
+  <button class="btn btn-default" (click)="bsModalRef.hide()">Close</button>
+</div>

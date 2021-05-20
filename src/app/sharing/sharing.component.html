@@ -1,0 +1,143 @@
+<div class="d-flex flex-row">
+  <h2 class="mr-auto text-primary">Saved Sharings</h2>
+  <button (click)="newSharing()" class="btn btn-success">New</button>
+</div>
+<hr />
+<h4 *ngIf="savedSharings.length == 0">There is no sharing in this section.</h4>
+<div *ngIf="savedSharings.length > 0">
+  <div *ngFor="let savedSharing of savedSharings" class="row border mb-2 py-2">
+    <div class="col-4">
+      <img
+        class="img-fluid"
+        [src]="
+          savedSharing.photoUrl || '../../assets/defaultSharingPicture.png'
+        "
+      />
+    </div>
+    <div class="col-4">
+      <h5>{{ savedSharing.productDescription }}</h5>
+      <p><strong>Category: </strong>{{ savedSharing.category.description }}</p>
+      <Strong>Portion Description: </Strong>
+      <p>{{ savedSharing.portionDescription }}</p>
+      <p>Last save time: {{ savedSharing.savedDate | date: "short" }}</p>
+    </div>
+    <div class="col-4">
+      <p>
+        <strong>Portion Price: </strong
+        >{{ savedSharing.portionPrice | currency }}
+      </p>
+      <p><strong>Portion Qty: </strong>{{ savedSharing.portionQty }}</p>
+      <p>Sharing will be end at: {{ savedSharing.deadline | date }}</p>
+      <input
+        type="file"
+        class="file-input"
+        (change)="onFileSelected($event)"
+        #fileUpload
+      />
+      <button class="btn btn-success" (click)="editSharing(savedSharing.id)">
+        Edit
+      </button>
+      <button
+        class="btn btn-primary ml-2"
+        (click)="publishSharing(savedSharing.id)"
+      >
+        Publish
+      </button>
+      <div class="row mt-2">
+        <button class="btn btn-primary ml-2" (click)="fileUpload.click()">
+          Selecte a Picture
+        </button>
+        <button
+          class="btn btn-primary ml-2"
+          (click)="uploadFile(savedSharing.id)"
+        >
+          Upload Picture
+        </button>
+      </div>
+
+      <p>{{ fileName || "No File Selected" }}</p>
+    </div>
+  </div>
+</div>
+
+<!-- Published Sharings -->
+<h2 class="mr-auto text-primary">Published Sharings</h2>
+<hr />
+<h4 *ngIf="publishedSharings.length == 0">
+  There is no sharing in this section.
+</h4>
+<div *ngIf="publishedSharings.length > 0">
+  <div
+    *ngFor="let publishedSharing of publishedSharings"
+    class="row border mb-2 py-2"
+  >
+    <div class="col-4">
+      <img
+        class="img-fluid"
+        [src]="
+          publishedSharing.photoUrl || '../../assets/defaultSharingPicture.png'
+        "
+      />
+    </div>
+    <div class="col-4">
+      <h5>{{ publishedSharing.productDescription }}</h5>
+      <p>
+        <strong>Category: </strong>{{ publishedSharing.category.description }}
+      </p>
+      <Strong>Portion Description: </Strong>
+      <p>{{ publishedSharing.portionDescription }}</p>
+    </div>
+    <div class="col-4">
+      <p>
+        <strong>Portion Price: </strong
+        >{{ publishedSharing.portionPrice | currency }}
+      </p>
+      <p><strong>Portion Qty: </strong>{{ publishedSharing.portionQty }}</p>
+      <p>Sharing will be end at: {{ publishedSharing.deadline | date }}</p>
+      <p>
+        Sharing was published:
+        {{ publishedSharing.publishedDate | date: "medium" }}
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- Achieved Sharings -->
+<h2 class="mr-auto text-primary">Achieved Sharings</h2>
+<hr />
+<h4 *ngIf="achievedSharings.length == 0">
+  There is no sharing in this section.
+</h4>
+<div *ngIf="achievedSharings.length > 0">
+  <div
+    *ngFor="let achievedSharing of achievedSharings"
+    class="row border mb-2 py-2"
+  >
+    <div class="col-4">
+      <img
+        class="img-fluid"
+        [src]="
+          achievedSharing.photoUrl || '../../assets/defaultSharingPicture.png'
+        "
+      />
+    </div>
+    <div class="col-4">
+      <h5>{{ achievedSharing.productDescription }}</h5>
+      <p>
+        <strong>Category: </strong>{{ achievedSharing.category.description }}
+      </p>
+      <Strong>Portion Description: </Strong>
+      <p>{{ achievedSharing.portionDescription }}</p>
+    </div>
+    <div class="col-4">
+      <p>
+        <strong>Portion Price: </strong
+        >{{ achievedSharing.portionPrice | currency }}
+      </p>
+      <p><strong>Portion Qty: </strong>{{ achievedSharing.portionQty }}</p>
+      <p>Sharing will be end at: {{ achievedSharing.deadline | date }}</p>
+    </div>
+  </div>
+</div>
+
+<!-- Completed Sharings -->

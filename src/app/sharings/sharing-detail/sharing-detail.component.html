@@ -18,7 +18,7 @@
     <div class="row">
       <button
         class="btn btn-primary"
-        (click)="joinSharing()"
+        (click)="openModalWithComponent()"
         *ngIf="
           sharing.status == 2 && accountService.currentUser$ | async as user
         "

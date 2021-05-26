@@ -4,7 +4,8 @@
 // Local: apiUrl: 'https://localhost:5001/api/',
 export const environment = {
   production: false,
-  apiUrl: 'https://sharing-api.azurewebsites.net/api/',
+  // apiUrl: 'https://sharing-api.azurewebsites.net/api/',
+  apiUrl: 'https://localhost:5001/api/',
 };
 
 /*

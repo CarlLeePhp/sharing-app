@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { take } from 'rxjs/operators';
 import { AppComment } from 'src/app/_models/AppComment';
@@ -11,6 +12,7 @@ import { CommentsService } from 'src/app/_services/comments.service';
 import { JoiningsService } from 'src/app/_services/joinings.service';
 import { MembersService } from 'src/app/_services/members.service';
 import { SharingService } from 'src/app/_services/sharing.service';
+import { JoiningFormComponent } from 'src/app/joinings/joining-form/joining-form.component';
 
 @Component({
   selector: 'app-sharing-detail',
@@ -18,6 +20,7 @@ import { SharingService } from 'src/app/_services/sharing.service';
   styleUrls: ['./sharing-detail.component.css'],
 })
 export class SharingDetailComponent implements OnInit {
+  bsModalRef: BsModalRef;
   sharing: Sharing;
   joining: Joining = {
     id: 0,
@@ -41,19 +44,19 @@ export class SharingDetailComponent implements OnInit {
     private membersService: MembersService,
     private toastr: ToastrService,
     private commentService: CommentsService,
-    private router: Router
+    private router: Router,
+    private bsModalService: BsModalService
   ) {
     this.sharing = this.sharingService.detailSharing;
-    //this.accountService.currentUser$.pipe(take(1)).subscribe((user) => {
-    //  this.user = user;
-    //});
   }
 
   ngOnInit(): void {
     this.joining.sharingId = this.sharing.id;
-    // this.checkJoined();
-    // this.checkOwned();
     this.getComments();
+  }
+  openModalWithComponent() {
+    this.bsModalRef = this.bsModalService.show(JoiningFormComponent);
+    this.bsModalRef.content.closeBtnName = 'Close';
   }
   getComments() {
     this.commentService

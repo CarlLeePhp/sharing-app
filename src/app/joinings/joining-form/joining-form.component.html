@@ -1,1 +1,27 @@
-<p>joining-form works!</p>
+<div class="modal-header">
+  <h4 class="modal-title text-primary">Joining</h4>
+</div>
+<div class="modal-body">
+  <div class="container">
+    <p>How many portion:</p>
+    <input
+      name="joiningQty"
+      [(ngModel)]="joiningQty"
+      class="form-control"
+      type="number"
+      placeholder="Portion Qty"
+    />
+  </div>
+  <p *ngIf="isJoined" class="text-danger">You joined this sharing before.</p>
+  <p *ngIf="isOwned" class="text-danger">It is your sharing.</p>
+</div>
+<div class="modal-footer">
+  <button
+    class="btn btn-primary"
+    [disabled]="isJoined || isOwned"
+    (click)="joinSharing()"
+  >
+    Join
+  </button>
+  <button class="btn btn-default" (click)="bsModalRef.hide()">Close</button>
+</div>

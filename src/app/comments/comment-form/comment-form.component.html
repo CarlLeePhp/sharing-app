@@ -13,11 +13,22 @@
 </div>
 <div class="row justify-content-center mt-3">
   <form class="col-8">
+    <ng-template #t let-index="index" let-value="value">
+      <img
+        [src]="
+          index < value
+            ? '../../../assets/star-light.png'
+            : '../../../assets/star.png'
+        "
+        style="height: 20px; width: 20px"
+      />
+    </ng-template>
     <span>Rate for this sharing</span>
     <rating
       [(ngModel)]="comment.sharingRate"
       [max]="maxRate"
       [readonly]="isReadonly"
+      [customTemplate]="t"
       name="sharingRate"
     ></rating>
     <div class="form-group">
@@ -34,6 +45,7 @@
       [(ngModel)]="comment.sharerRate"
       [max]="maxRate"
       [readonly]="isReadonly"
+      [customTemplate]="t"
       name="sharerRate"
     ></rating>
     <div class="form-group">

@@ -92,6 +92,11 @@ export class MyJoiningsComponent implements OnInit {
           .updateQty(this.ongoingJoinings[i])
           .subscribe(() => {
             this.toastr.info('Update successfully');
+            // Check the qty
+            if (this.ongoingJoinings[i].sharing.availableQty == 0) {
+              this.achievedJoinings.push(this.ongoingJoinings[i]);
+              this.ongoingJoinings.splice(i, 1);
+            }
           });
         break;
       }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
+import { Member } from 'src/app/_models/Member';
+import { MembersService } from 'src/app/_services/members.service';
 import { AccountService } from '../../_services/account.service';
 
 @Component({
@@ -9,26 +11,40 @@ import { AccountService } from '../../_services/account.service';
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
-  model: any = {};
+  members: Member[];
+  model: any = {
+    email: '',
+    userName: '',
+    password: '',
+  };
   confirmPassword: string = '';
   isEmailEmpty: boolean = false;
+  isEmailExist: boolean = false;
   isUserNameEmpty: boolean = false;
+  isUserNameExist: boolean = false;
   isPasswordEmpty: boolean = false;
   isPasswordConfirmEmpty: boolean = false;
   isPasswordsNotMatch: boolean = false;
 
   constructor(
     private accountService: AccountService,
+    private memberService: MembersService,
     private toastr: ToastrService,
     public bsModalRef: BsModalRef
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.memberService.getMembers().subscribe((members) => {
+      this.members = members;
+    });
+  }
 
   register() {
     let isError: boolean = false;
     this.isEmailEmpty = false;
+    this.isEmailExist = false;
     this.isUserNameEmpty = false;
+    this.isUserNameExist = false;
     this.isPasswordEmpty = false;
     this.isPasswordConfirmEmpty = false;
     this.isPasswordsNotMatch = false;
@@ -39,6 +55,22 @@ export class RegisterComponent implements OnInit {
     if (this.model.userName == null || this.model.userName == '') {
       this.isUserNameEmpty = true;
       isError = true;
+    }
+    for (let i = 0; i < this.members.length; i++) {
+      if (
+        this.members[i].userName.toLowerCase() ==
+        this.model.userName.toLowerCase()
+      ) {
+        this.isUserNameExist = true;
+        isError = true;
+      }
+
+      if (
+        this.members[i].email.toLowerCase() == this.model.email.toLowerCase()
+      ) {
+        this.isEmailExist = true;
+        isError = true;
+      }
     }
     if (this.model.password == null || this.model.password == '') {
       this.isPasswordEmpty = true;

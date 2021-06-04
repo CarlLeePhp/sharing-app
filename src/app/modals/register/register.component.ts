@@ -22,6 +22,7 @@ export class RegisterComponent implements OnInit {
   isEmailExist: boolean = false;
   isUserNameEmpty: boolean = false;
   isUserNameExist: boolean = false;
+  isUserNameContainSpace: boolean = false;
   isPasswordEmpty: boolean = false;
   isPasswordConfirmEmpty: boolean = false;
   isPasswordsNotMatch: boolean = false;
@@ -45,15 +46,21 @@ export class RegisterComponent implements OnInit {
     this.isEmailExist = false;
     this.isUserNameEmpty = false;
     this.isUserNameExist = false;
+    this.isUserNameContainSpace = false;
     this.isPasswordEmpty = false;
     this.isPasswordConfirmEmpty = false;
     this.isPasswordsNotMatch = false;
+    this.model.userName = this.model.userName.trim();
     if (this.model.email == null || this.model.email == '') {
       this.isEmailEmpty = true;
       isError = true;
     }
     if (this.model.userName == null || this.model.userName == '') {
       this.isUserNameEmpty = true;
+      isError = true;
+    }
+    if (this.model.userName.includes(' ')) {
+      this.isUserNameContainSpace = true;
       isError = true;
     }
     for (let i = 0; i < this.members.length; i++) {

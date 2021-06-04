@@ -36,16 +36,20 @@
         {{ ongoingJoining.sharing.availableQty }} portions
       </p>
       <div class="d-flex flex-row">
-        <p><strong>Your Qty: </strong> {{ ongoingJoining.joinQty }} portions</p>
+        <strong>Your Qty: </strong>
         <button
-          class="btn btn-primary btn-sm ml-2"
+          class="btn btn-primary btn-sm ml-1"
           (click)="reduce(ongoingJoining.id)"
+          style="height: 30px; width: 30px"
         >
           -
         </button>
+        <p class="ml-1">{{ ongoingJoining.joinQty }} portions</p>
+
         <button
           class="btn btn-primary btn-sm ml-1"
           (click)="addQty(ongoingJoining.id)"
+          style="height: 30px; width: 30px"
         >
           +
         </button>

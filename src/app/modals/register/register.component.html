@@ -22,7 +22,9 @@
     />
     <p class="text-danger" *ngIf="isUserNameEmpty">User Name cannot be empty</p>
     <p class="text-danger" *ngIf="isUserNameExist">User Name is exist</p>
-
+    <p class="text-danger" *ngIf="isUserNameContainSpace">
+      User Name cannot contain spaces
+    </p>
     <input
       type="password"
       name="password"

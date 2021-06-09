@@ -52,12 +52,25 @@ export class HomeComponent implements OnInit {
       for (let i = 0; i < sharings.length; i++) {
         switch (sharings[i].status) {
           case 2:
-            if (this.publishedSharings.length < 8)
+            let deadline: Date = new Date(sharings[i].deadline);
+            let deadlineTime: Number = deadline.getTime();
+            let currentDate: Date = new Date();
+            let currentTime: Number = currentDate.getTime();
+            if (deadlineTime < currentTime) {
+              sharings[i].status = -1;
+              sharings[i].category = null;
+
+              this.sharingService.updateSharing(sharings[i]).subscribe();
+            } else {
               this.publishedSharings.push(sharings[i]);
+            }
+
             break;
           case 4:
-            if (this.completedSharings.length < 8)
+            if (this.completedSharings.length < 8) {
               this.completedSharings.push(sharings[i]);
+            }
+
             break;
           default:
             break;

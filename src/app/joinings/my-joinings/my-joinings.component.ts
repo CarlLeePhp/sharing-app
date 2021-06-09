@@ -18,6 +18,7 @@ export class MyJoiningsComponent implements OnInit {
   ongoingJoinings: Joining[] = [];
   achievedJoinings: Joining[] = [];
   completedJoinings: Joining[] = [];
+  expiredJoinings: Joining[] = [];
   joinings: Joining[] = [];
   user: User;
 
@@ -44,6 +45,11 @@ export class MyJoiningsComponent implements OnInit {
         this.joinings = joinings;
         for (let i = 0; i < joinings.length; i++) {
           switch (joinings[i].sharing.status) {
+            case -1:
+              if (this.expiredJoinings.length < 20) {
+                this.expiredJoinings.push(joinings[i]);
+              }
+              break;
             case 2:
               this.ongoingJoinings.push(joinings[i]);
               break;

@@ -167,3 +167,46 @@
     </div>
   </div>
 </div>
+
+<!-- Expired Joinings -->
+<h2 class="text-primary mt-2">Expired Joinings</h2>
+<hr />
+<div *ngIf="expiredJoinings.length == 0">
+  <p class="text-danger">No Completed Joining</p>
+</div>
+<div *ngIf="expiredJoinings.length > 0">
+  <div class="row" *ngFor="let expiredJoining of expiredJoinings">
+    <div class="col-12 col-lg-4">
+      <img
+        class="img-fluid"
+        [src]="
+          expiredJoining.sharing.photoUrl ||
+          '../../../assets/defaultSharingPicture.png'
+        "
+      />
+    </div>
+    <div class="col-12 col-lg-4">
+      <h5>{{ expiredJoining.sharing.productDescription }}</h5>
+
+      <Strong>Portion Description: </Strong>
+      <p>{{ expiredJoining.sharing.portionDescription }}</p>
+      <p>
+        <strong>Portion Price: </strong
+        >{{ expiredJoining.sharing.portionPrice | currency }}
+      </p>
+      <p>
+        Sharing was expired at: {{ expiredJoining.sharing.deadline | date }}
+      </p>
+    </div>
+    <div class="col-12 col-lg-4">
+      <p>
+        <strong>Portion Qty: </strong>{{ expiredJoining.sharing.portionQty }}
+      </p>
+      <p>
+        <strong>Available Aty: </strong>
+        {{ expiredJoining.sharing.availableQty }} portions
+      </p>
+      <p><strong>Your Qty: </strong> {{ expiredJoining.joinQty }} portions</p>
+    </div>
+  </div>
+</div>

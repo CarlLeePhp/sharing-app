@@ -141,3 +141,77 @@
 </div>
 
 <!-- Completed Sharings -->
+<h2 class="mr-auto text-primary">Completed Sharings</h2>
+<hr />
+<h4 *ngIf="completedSharings.length == 0">
+  There is no sharing in this section.
+</h4>
+<div *ngIf="completedSharings.length > 0">
+  <div
+    *ngFor="let completedSharing of completedSharings"
+    class="row border mb-2 py-2"
+  >
+    <div class="col-12 col-lg-4">
+      <img
+        class="img-fluid"
+        [src]="
+          completedSharing.photoUrl || '../../assets/defaultSharingPicture.png'
+        "
+      />
+    </div>
+    <div class="col-12 col-lg-4">
+      <h5>{{ completedSharing.productDescription }}</h5>
+      <p>
+        <strong>Category: </strong>{{ completedSharing.category.description }}
+      </p>
+      <Strong>Portion Description: </Strong>
+      <p>{{ completedSharing.portionDescription }}</p>
+    </div>
+    <div class="col-12 col-lg-4">
+      <p>
+        <strong>Portion Price: </strong
+        >{{ completedSharing.portionPrice | currency }}
+      </p>
+      <p><strong>Portion Qty: </strong>{{ completedSharing.portionQty }}</p>
+      <p>Sharing will be end at: {{ completedSharing.deadline | date }}</p>
+    </div>
+  </div>
+</div>
+
+<!-- Expired Sharings -->
+<h2 class="mr-auto text-primary">Expired Sharings</h2>
+<hr />
+<h4 *ngIf="expiredSharings.length == 0">
+  There is no sharing in this section.
+</h4>
+<div *ngIf="expiredSharings.length > 0">
+  <div
+    *ngFor="let expiredSharing of expiredSharings"
+    class="row border mb-2 py-2"
+  >
+    <div class="col-12 col-lg-4">
+      <img
+        class="img-fluid"
+        [src]="
+          expiredSharing.photoUrl || '../../assets/defaultSharingPicture.png'
+        "
+      />
+    </div>
+    <div class="col-12 col-lg-4">
+      <h5>{{ expiredSharing.productDescription }}</h5>
+      <p>
+        <strong>Category: </strong>{{ expiredSharing.category.description }}
+      </p>
+      <Strong>Portion Description: </Strong>
+      <p>{{ expiredSharing.portionDescription }}</p>
+    </div>
+    <div class="col-12 col-lg-4">
+      <p>
+        <strong>Portion Price: </strong
+        >{{ expiredSharing.portionPrice | currency }}
+      </p>
+      <p><strong>Portion Qty: </strong>{{ expiredSharing.portionQty }}</p>
+      <p>Sharing was expired at: {{ expiredSharing.deadline | date }}</p>
+    </div>
+  </div>
+</div>

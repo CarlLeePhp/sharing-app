@@ -19,6 +19,7 @@ export class SharingComponent implements OnInit {
   publishedSharings: Sharing[] = [];
   achievedSharings: Sharing[] = [];
   completedSharings: Sharing[] = [];
+  expiredSharings: Sharing[] = [];
   fileName: string;
   selectedFile: File;
 
@@ -28,7 +29,7 @@ export class SharingComponent implements OnInit {
     private toastr: ToastrService,
     private router: Router
   ) {
-    accountService.currentUser$.pipe(take(1)).subscribe((user) => {
+    this.accountService.currentUser$.pipe(take(1)).subscribe((user) => {
       this.user = user;
     });
   }
@@ -42,6 +43,11 @@ export class SharingComponent implements OnInit {
       .subscribe((sharings) => {
         for (let i = 0; i < sharings.length; i++) {
           switch (sharings[i].status) {
+            case -1:
+              if (this.expiredSharings.length < 20) {
+                this.expiredSharings.push(sharings[i]);
+              }
+              break;
             case 1:
               this.savedSharings.push(sharings[i]);
               break;

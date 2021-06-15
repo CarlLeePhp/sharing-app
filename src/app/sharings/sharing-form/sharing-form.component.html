@@ -38,13 +38,14 @@
       name="portionDescription"
       rows="4"
       [(ngModel)]="sharing.portionDescription"
+      placeholder="e.g. 2 kg per portion"
     ></textarea>
   </div>
   <div class="form-group">
     <label for="portionQty">Portion Quantity</label>
     <input
       class="form-control"
-      type="text"
+      type="number"
       name="portionQty"
       [(ngModel)]="sharing.portionQty"
     />
@@ -53,16 +54,16 @@
     <label for="keepQty">How many you want to keep</label>
     <input
       class="form-control"
-      type="text"
+      type="number"
       name="keepQty"
       [(ngModel)]="sharing.keepQty"
     />
   </div>
   <div class="form-group">
-    <label for="portionPrice">Portion Price</label>
+    <label for="portionPrice">Portion Price (NZ$)</label>
     <input
       class="form-control"
-      type="text"
+      type="number"
       name="portionPrice"
       [(ngModel)]="sharing.portionPrice"
     />

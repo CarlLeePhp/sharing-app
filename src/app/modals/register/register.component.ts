@@ -24,6 +24,8 @@ export class RegisterComponent implements OnInit {
   isUserNameExist: boolean = false;
   isUserNameContainSpace: boolean = false;
   isPasswordEmpty: boolean = false;
+  isPasswordInvalid: boolean = false;
+  isPasswordShort: boolean = false;
   isPasswordConfirmEmpty: boolean = false;
   isPasswordsNotMatch: boolean = false;
 
@@ -48,6 +50,8 @@ export class RegisterComponent implements OnInit {
     this.isUserNameExist = false;
     this.isUserNameContainSpace = false;
     this.isPasswordEmpty = false;
+    this.isPasswordInvalid = false;
+    this.isPasswordShort = false;
     this.isPasswordConfirmEmpty = false;
     this.isPasswordsNotMatch = false;
     this.model.userName = this.model.userName.trim();
@@ -81,6 +85,23 @@ export class RegisterComponent implements OnInit {
     }
     if (this.model.password == null || this.model.password == '') {
       this.isPasswordEmpty = true;
+      isError = true;
+    }
+    let regexUp = /[A-Z]/;
+    let regexLow = /[a-z]/;
+    let regexNum = /[0-9]/;
+    let regexSp = /[~!@#$%^&*]/;
+    if (
+      this.model.password.match(regexUp) == null ||
+      this.model.password.match(regexLow) == null ||
+      this.model.password.match(regexNum) == null ||
+      this.model.password.match(regexSp) == null
+    ) {
+      this.isPasswordInvalid = true;
+      isError = true;
+    }
+    if (this.model.password.length < 4) {
+      this.isPasswordShort = true;
       isError = true;
     }
     if (this.confirmPassword == null || this.confirmPassword == '') {

@@ -11,7 +11,7 @@
       placeholder="Email"
     />
     <p class="text-danger" *ngIf="isEmailEmpty">Email cannot be empty</p>
-    <p class="text-danger" *ngIf="isEmailExist">Email is exist</p>
+    <p class="text-danger" *ngIf="isEmailExist">Email exists</p>
 
     <input
       type="text"
@@ -21,7 +21,7 @@
       placeholder="Username"
     />
     <p class="text-danger" *ngIf="isUserNameEmpty">User Name cannot be empty</p>
-    <p class="text-danger" *ngIf="isUserNameExist">User Name is exist</p>
+    <p class="text-danger" *ngIf="isUserNameExist">Username exists</p>
     <p class="text-danger" *ngIf="isUserNameContainSpace">
       User Name cannot contain spaces
     </p>
@@ -30,10 +30,16 @@
       name="password"
       class="form-control mt-3"
       [(ngModel)]="model.password"
-      placeholder="Password (4 charaters for minimum)"
+      placeholder="Password (4 characters for minimum)"
     />
     <p class="text-danger" *ngIf="isPasswordEmpty">Password cannot be empty</p>
-
+    <p class="text-danger" *ngIf="isPasswordInvalid">
+      Password must include a Upcase letter, a lower case letter, a number and a
+      symbol (~!@#$%^&*).
+    </p>
+    <p class="text-danger" *ngIf="isPasswordShort">
+      Password must include 4 characters form minimum.
+    </p>
     <input
       type="password"
       name="password"

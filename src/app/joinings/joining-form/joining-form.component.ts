@@ -54,6 +54,10 @@ export class JoiningFormComponent implements OnInit {
   joinSharing() {
     this.joining.joinQty = this.joiningQty;
     this.joining.sharingId = this.sharing.id;
+    if (this.joiningQty == 0) {
+      this.toastr.error('Quantity cannot be 0');
+      return;
+    }
     if (this.joiningQty > this.sharing.availableQty) {
       this.toastr.error('More than available');
       return;

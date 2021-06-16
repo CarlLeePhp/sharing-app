@@ -15,6 +15,7 @@ import { SharingService } from 'src/app/_services/sharing.service';
 export class SharingFormComponent implements OnInit {
   sharing: Sharing;
   categories: Category[] = [];
+  minDate: Date = new Date(Date.now());
 
   constructor(
     private sharingService: SharingService,
@@ -85,13 +86,19 @@ export class SharingFormComponent implements OnInit {
       errors.push('Set a Portion Qty');
     }
     if (this.sharing.keepQty == 0) {
-      errors.push('How much you want to keep');
+      errors.push('How many do you want to keep');
     }
     if (this.sharing.portionPrice == 0) {
       errors.push('Set a Portion Price');
     }
     if (this.sharing.howToShare == '') {
       errors.push('Set how to share it');
+    }
+    if (this.sharing.keepQty >= this.sharing.portionQty) {
+      errors.push('The keep quantity should be less than the Portion quantity');
+    }
+    if (this.sharing.portionQty < 2) {
+      errors.push('The Portion quantity should be greater than 1');
     }
     return errors;
   }

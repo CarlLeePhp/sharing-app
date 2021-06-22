@@ -18,6 +18,8 @@ export interface Sharing {
   photoPublicId: string;
 
   appUserId: number;
+  appUserName: string;
+  appUserEmail: string;
   category: Category;
   categoryId: number;
 }

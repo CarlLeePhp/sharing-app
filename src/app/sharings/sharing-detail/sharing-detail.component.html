@@ -8,6 +8,10 @@
   </div>
   <div class="col-4">
     <p><strong>Category: </strong>{{ sharing.category.description }}</p>
+    <p><strong>Published by: </strong>{{ sharing.appUserName || "Unknown" }}</p>
+    <p>
+      <strong>Sharer Email: </strong>{{ sharing.appUserEmail || "Unknown" }}
+    </p>
     <Strong>Portion Description: </Strong>
     <p>{{ sharing.portionDescription }}</p>
   </div>

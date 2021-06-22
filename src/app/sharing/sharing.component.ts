@@ -82,6 +82,8 @@ export class SharingComponent implements OnInit {
       publishedDate: new Date(),
       achievedDate: new Date(),
       appUserId: 0,
+      appUserName: '',
+      appUserEmail: '',
       category: {
         id: 0,
         description: '',

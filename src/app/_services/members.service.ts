@@ -10,6 +10,8 @@ import { Photo } from '../_models/Photo';
 export class MembersService {
   baseUrl = environment.apiUrl;
 
+  currentSharerId: number;
+
   constructor(private http: HttpClient) {}
 
   getMembers() {
@@ -17,7 +19,10 @@ export class MembersService {
   }
 
   getMember(email: string) {
-    return this.http.get<Member>(this.baseUrl + 'users/' + email);
+    return this.http.get<Member>(this.baseUrl + 'users/email/' + email);
+  }
+  getMemberById(id: number) {
+    return this.http.get<Member>(this.baseUrl + 'users/id/' + id);
   }
 
   updateMember(member: Member) {

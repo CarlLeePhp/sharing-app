@@ -60,6 +60,14 @@
           Update
         </button>
       </div>
+      <div class="row">
+        <button
+          class="btn btn-primary"
+          (click)="openModalWithComponent(ongoingJoining.sharing.appUserId)"
+        >
+          Sharer Detail
+        </button>
+      </div>
     </div>
   </div>
 </div>
@@ -114,6 +122,12 @@
       >
         Complete
       </button>
+      <button
+        class="btn btn-primary ml-2"
+        (click)="openModalWithComponent(achievedJoining.sharing.appUserId)"
+      >
+        Sharer Detail
+      </button>
     </div>
   </div>
 </div>
@@ -164,6 +178,12 @@
       >
         Comment
       </button>
+      <button
+        class="btn btn-primary ml-2"
+        (click)="openModalWithComponent(completedJoining.sharing.appUserId)"
+      >
+        Sharer Detail
+      </button>
     </div>
   </div>
 </div>
@@ -207,6 +227,14 @@
         {{ expiredJoining.sharing.availableQty }} portions
       </p>
       <p><strong>Your Qty: </strong> {{ expiredJoining.joinQty }} portions</p>
+      <div class="row">
+        <button
+          class="btn btn-primary"
+          (click)="openModalWithComponent(expiredJoining.sharing.appUserId)"
+        >
+          Sharer Detail
+        </button>
+      </div>
     </div>
   </div>
 </div>

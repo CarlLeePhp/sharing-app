@@ -53,6 +53,7 @@ export class SharingDetailComponent implements OnInit {
   ngOnInit(): void {
     this.joining.sharingId = this.sharing.id;
     this.getComments();
+    this.getSharer();
   }
   openModalWithComponent() {
     this.bsModalRef = this.bsModalService.show(JoiningFormComponent);
@@ -63,6 +64,14 @@ export class SharingDetailComponent implements OnInit {
       .getCommentsBySharing(this.sharing.id)
       .subscribe((comments) => {
         this.comments = comments;
+      });
+  }
+  getSharer() {
+    this.membersService
+      .getMemberById(this.sharing.appUserId)
+      .subscribe((member) => {
+        this.sharing.appUserName = member.userName;
+        this.sharing.appUserEmail = member.email;
       });
   }
   checkJoined() {

@@ -1,0 +1,12 @@
+<div class="modal-header">
+  <h4 class="modal-title text-primary">Sharer Information</h4>
+</div>
+<div class="modal-body">
+  <div class="container" *ngIf="sharer">
+    <p><strong>User Name: </strong> {{ sharer.userName }}</p>
+    <p><strong>Email: </strong> {{ sharer.email }}</p>
+  </div>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-default" (click)="bsModalRef.hide()">Close</button>
+</div>

@@ -31,6 +31,7 @@ import { JoiningFormComponent } from './joinings/joining-form/joining-form.compo
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { CommentFormComponent } from './comments/comment-form/comment-form.component';
 import { SearchResultComponent } from './sharings/search-result/search-result.component';
+import { SharerComponent } from './modals/sharer/sharer.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { SearchResultComponent } from './sharings/search-result/search-result.co
     ForgotPasswordComponent,
     CommentFormComponent,
     SearchResultComponent,
+    SharerComponent,
   ],
   imports: [
     BrowserModule,

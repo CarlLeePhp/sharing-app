@@ -8,6 +8,9 @@ import { User } from 'src/app/_models/User';
 import { AccountService } from 'src/app/_services/account.service';
 import { CommentsService } from 'src/app/_services/comments.service';
 import { JoiningsService } from 'src/app/_services/joinings.service';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { SharerComponent } from 'src/app/modals/sharer/sharer.component';
+import { MembersService } from 'src/app/_services/members.service';
 
 @Component({
   selector: 'app-my-joinings',
@@ -21,13 +24,16 @@ export class MyJoiningsComponent implements OnInit {
   expiredJoinings: Joining[] = [];
   joinings: Joining[] = [];
   user: User;
+  bsModalRef: BsModalRef;
 
   constructor(
     private joiningsService: JoiningsService,
     private accountService: AccountService,
+    private membersService: MembersService,
     private commentsService: CommentsService,
     private toastr: ToastrService,
-    private router: Router
+    private router: Router,
+    private bsModalService: BsModalService
   ) {
     this.accountService.currentUser$.pipe(take(1)).subscribe((user) => {
       this.user = user;
@@ -124,5 +130,11 @@ export class MyJoiningsComponent implements OnInit {
   commentSharing(sharing: Sharing) {
     this.commentsService.selectedSharing = sharing;
     this.router.navigateByUrl('/comment-form');
+  }
+
+  openModalWithComponent(id: number) {
+    this.membersService.currentSharerId = id;
+    this.bsModalRef = this.bsModalService.show(SharerComponent);
+    this.bsModalRef.content.closeBtnName = 'Close';
   }
 }
